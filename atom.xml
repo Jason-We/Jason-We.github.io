@@ -6,7 +6,7 @@
   <link href="http://jasonwe.com/atom.xml" rel="self"/>
   
   <link href="http://jasonwe.com/"/>
-  <updated>2020-10-15T02:46:31.035Z</updated>
+  <updated>2020-10-16T07:48:12.648Z</updated>
   <id>http://jasonwe.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>第一篇博客</title>
+    <link href="http://jasonwe.com/2020/10/16/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/"/>
+    <id>http://jasonwe.com/2020/10/16/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</id>
+    <published>2020-10-16T02:52:23.000Z</published>
+    <updated>2020-10-16T07:48:12.648Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="First-Blog"><a href="#First-Blog" class="headerlink" title="First Blog"></a>First Blog</h3><p>使用<a href="https://typora.io/">Typora</a>进行博客文章编写。</p><blockquote><h3 id="Readable-amp-Writable"><a href="#Readable-amp-Writable" class="headerlink" title="Readable &amp; Writable"></a>Readable &amp; Writable</h3><p>Typora gives you a seamless experience as both a reader and a writer. It removes the preview window, mode switcher, syntax symbols of markdown source code, and all other unnecessary distractions. Instead, it provides a real live preview feature to help you concentrate on the content itself.</p></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;First-Blog&quot;&gt;&lt;a href=&quot;#First-Blog&quot; class=&quot;headerlink&quot; title=&quot;First Blog&quot;&gt;&lt;/a&gt;First Blog&lt;/h3&gt;&lt;p&gt;使用&lt;a href=&quot;https://typora.io/&quot;&gt;Typora&lt;</summary>
+      
+    
+    
+    
+    
+    <category term="first" scheme="http://jasonwe.com/tags/first/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
