@@ -1,3 +1,3 @@
 # a personal blog
 
-> 使用[Hexo (https://hexo.io/zh-cn/)](https://hexo.io/zh-cn/)搭建，采用[hexo-theme-matery主题](https://github.com/blinkfox/hexo-theme-matery)
+> 浣跨敤[Hexo (https://hexo.io/zh-cn/)](https://hexo.io/zh-cn/)鎼缓锛岄噰鐢╗hexo-theme-matery涓婚](https://github.com/blinkfox/hexo-theme-matery)
