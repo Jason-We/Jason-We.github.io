@@ -6,7 +6,7 @@
   <link href="https://jason-we.github.io/atom.xml" rel="self"/>
   
   <link href="https://jason-we.github.io/"/>
-  <updated>2020-10-19T10:00:19.831Z</updated>
+  <updated>2020-10-20T00:34:46.581Z</updated>
   <id>https://jason-we.github.io/</id>
   
   <author>
@@ -18,17 +18,19 @@
   
   <entry>
     <title>Hexo博客搭建之使用git分支实现多终端环境</title>
-    <link href="https://jason-we.github.io/2020/10/19/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E4%B9%8B%E4%BD%BF%E7%94%A8git%E5%88%86%E6%94%AF%E5%AE%9E%E7%8E%B0%E5%A4%9A%E7%BB%88%E7%AB%AF%E7%8E%AF%E5%A2%83/"/>
-    <id>https://jason-we.github.io/2020/10/19/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E4%B9%8B%E4%BD%BF%E7%94%A8git%E5%88%86%E6%94%AF%E5%AE%9E%E7%8E%B0%E5%A4%9A%E7%BB%88%E7%AB%AF%E7%8E%AF%E5%A2%83/</id>
+    <link href="https://jason-we.github.io/2020/10/19/hexo-bo-ke-da-jian-zhi-shi-yong-git-fen-zhi-shi-xian-duo-zhong-duan-huan-jing/"/>
+    <id>https://jason-we.github.io/2020/10/19/hexo-bo-ke-da-jian-zhi-shi-yong-git-fen-zhi-shi-xian-duo-zhong-duan-huan-jing/</id>
     <published>2020-10-19T09:21:55.000Z</published>
-    <updated>2020-10-19T10:00:19.831Z</updated>
+    <updated>2020-10-20T00:34:46.581Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><h6 id="该文前提默认你已经使用hexo在GitHub上搭建起了自己的博客系统，强烈建议先搭建好博客再读此文！"><a href="#该文前提默认你已经使用hexo在GitHub上搭建起了自己的博客系统，强烈建议先搭建好博客再读此文！" class="headerlink" title="该文前提默认你已经使用hexo在GitHub上搭建起了自己的博客系统，强烈建议先搭建好博客再读此文！"></a>该文前提默认你已经使用hexo在GitHub上搭建起了自己的博客系统，强烈建议先搭建好博客再读此文！</h6><p>如果你现在在自己的笔记本上写的博客，部署在了网站上，那么你在家里用台式机，或者实验室的台式机，发现你电脑里面没有博客的文件，或者要换电脑了，最后不知道怎么移动文件，怎么办？</p><p>在这里我们就可以利用git的分支系统进行多终端工作了，这样每次打开不一样的电脑，只需要进行简单的配置和在github上把文件同步下来，就可以无缝操作了。</p><h3 id="hexo机制"><a href="#hexo机制" class="headerlink" title="hexo机制"></a>hexo机制</h3><p>由于<code>hexo d</code>上传部署到github的其实是hexo编译后的文件，是用来生成网页的，不包含源文件。</p><p>也就是上传的是在本地目录里自动生成的<code>.deploy_git</code>里面。</p><p>其他文件 ，包括我们写在source 里面的，和配置文件，主题文件，都没有上传到github</p><p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrksthbryj20eb07swej.jpg" alt="img"></p><p>所以可以利用git的分支管理，将源文件上传到github的另一个分支即可。</p><h3 id="具体操作"><a href="#具体操作" class="headerlink" title="具体操作"></a>具体操作</h3><h4 id="新建分支"><a href="#新建分支" class="headerlink" title="新建分支"></a>新建分支</h4><p>首先在你的github pages项目仓库（如我的是<a href="https://github.com/Jason-We/Jason-We.github.io">Jason-We.github.io</a>新建一个分支，名称自拟，可以是hexo。</p><p>然后在这个仓库的settings中，选择默认分支为hexo（这样每次同步的时候就不用指定分支，比较方便）。</p><h4 id="本地克隆"><a href="#本地克隆" class="headerlink" title="本地克隆"></a>本地克隆</h4><p>在本地的任意你喜欢的目录下，将上述仓库克隆下来，因为默认分支已经设成了hexo，所以clone时只clone了hexo。接下来在克隆到本地的<code>ZJUFangzh.github.io</code>中，把除了.git 文件夹外的所有文件都删掉</p><p>把之前我们写的博客源文件全部复制过来，除了<code>.deploy_git</code>。这里应该说一句，复制过来的源文件应该有一个<code>.gitignore</code>，用来忽略一些不需要的文件，如果没有的话，自己新建一个，在里面写上如下，表示这些类型文件不需要git：</p><pre><code>.DS_StoreThumbs.dbdb.json*.lognode_modules/public/.deploy*/</code></pre><p><strong>注意，如果你之前克隆过theme中的主题文件，那么应该把主题文件中的<code>.git</code>文件夹删掉，因为git不能嵌套上传，最好是显示隐藏文件，检查一下有没有，否则上传的时候会出错，导致你的主题文件无法上传，这样你的配置在别的电脑上就用不了了。</strong></p><p>然后，</p><pre><code>git add .git commit –m &quot;add branch&quot;git push </code></pre><p>这样就上传完了，可以去你的github上看一看hexo分支有没有上传上去，其中<code>node_modules</code>、<code>public</code>、<code>db.json</code>已经被忽略掉了，没有关系，不需要上传的，因为在别的电脑上需要重新输入命令安装 。</p><h4 id="换电脑操作"><a href="#换电脑操作" class="headerlink" title="换电脑操作"></a>换电脑操作</h4><p>在你已经安装好了git、nodejs、hexo的机器上，再任意你喜欢的空文件夹下，将你上述push好的的仓库克隆到本机。进入到该目录后，执行：</p><pre><code>npm installnpm install hexo-deployer-git --save</code></pre><p>之后 ， 生成+部署：</p><pre><code>hexo ghexo d</code></pre><p>至此，已经搞定啦。接下来就可以在这台机器上愉快的写博客了。</p><pre><code>hexo new &quot;你的文章名称&quot;</code></pre><h4 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h4><ol><li>不要忘了，每次写完最好都把源文件上传一下</li></ol><pre><code>git add .git commit –m &quot;xxxx&quot;git push 123</code></pre><ol><li>如果是在已经编辑过的电脑上，已经有clone文件夹了，那么，每次只要和远端同步一下就行了</li></ol><pre><code>git pull</code></pre>]]></content>
+    <content type="html"><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><blockquote><p>该文前提默认你已经使用hexo在GitHub上搭建起了自己的博客系统，强烈建议先搭建好博客再读此文！</p></blockquote><p>如果你现在在自己的笔记本上写的博客，部署在了网站上，那么你在家里用台式机，或者实验室的台式机，发现你电脑里面没有博客的文件，或者要换电脑了，最后不知道怎么移动文件，怎么办？</p><p>在这里我们就可以利用git的分支系统进行多终端工作了，这样每次打开不一样的电脑，只需要进行简单的配置和在github上把文件同步下来，就可以无缝操作了。</p><h2 id="hexo机制"><a href="#hexo机制" class="headerlink" title="hexo机制"></a>hexo机制</h2><p>由于<code>hexo d</code>上传部署到github的其实是hexo编译后的文件，是用来生成网页的，不包含源文件。</p><p>也就是上传的是在本地目录里自动生成的<code>.deploy_git</code>里面。</p><p>其他文件 ，包括我们写在source 里面的，和配置文件，主题文件，都没有上传到github</p><p>所以可以利用git的分支管理，将源文件上传到github的另一个分支即可。</p><h2 id="具体操作"><a href="#具体操作" class="headerlink" title="具体操作"></a>具体操作</h2><h3 id="新建分支"><a href="#新建分支" class="headerlink" title="新建分支"></a>新建分支</h3><p>首先在你的github pages项目仓库（如我的是<a href="https://github.com/Jason-We/Jason-We.github.io">Jason-We.github.io</a>新建一个分支，名称自拟，可以是hexo。</p><p>然后在这个仓库的settings中，选择默认分支为hexo（这样每次同步的时候就不用指定分支，比较方便）。</p><h3 id="本地克隆"><a href="#本地克隆" class="headerlink" title="本地克隆"></a>本地克隆</h3><p>在本地的任意你喜欢的目录下，将上述仓库克隆下来，因为默认分支已经设成了hexo，所以clone时只clone了hexo。接下来在克隆到本地的<code>ZJUFangzh.github.io</code>中，把除了.git 文件夹外的所有文件都删掉</p><p>把之前我们写的博客源文件全部复制过来，除了<code>.deploy_git</code>。这里应该说一句，复制过来的源文件应该有一个<code>.gitignore</code>，用来忽略一些不需要的文件，如果没有的话，自己新建一个，在里面写上如下，表示这些类型文件不需要git：</p><pre><code>.DS_StoreThumbs.dbdb.json*.lognode_modules/public/.deploy*/</code></pre><p><strong>注意，如果你之前克隆过theme中的主题文件，那么应该把主题文件中的<code>.git</code>文件夹删掉，因为git不能嵌套上传，最好是显示隐藏文件，检查一下有没有，否则上传的时候会出错，导致你的主题文件无法上传，这样你的配置在别的电脑上就用不了了。</strong></p><p>然后，</p><pre><code>git add .git commit –m "add branch"git push </code></pre><p>这样就上传完了，可以去你的github上看一看hexo分支有没有上传上去，其中<code>node_modules</code>、<code>public</code>、<code>db.json</code>已经被忽略掉了，没有关系，不需要上传的，因为在别的电脑上需要重新输入命令安装 。</p><h3 id="换电脑操作"><a href="#换电脑操作" class="headerlink" title="换电脑操作"></a>换电脑操作</h3><p>在你已经安装好了git、nodejs、hexo的机器上，再任意你喜欢的空文件夹下，将你上述push好的的仓库克隆到本机。进入到该目录后，执行：</p><pre><code>npm installnpm install hexo-deployer-git --save</code></pre><p>之后 ， 生成+部署：</p><pre><code>hexo ghexo d</code></pre><p>至此，已经搞定啦。接下来就可以在这台机器上愉快的写博客了。</p><pre><code>hexo new "你的文章名称"</code></pre><h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><ol><li>不要忘了，每次写完最好都把源文件上传一下</li></ol><pre><code>git add .git commit –m "xxxx"git push 123</code></pre><ol><li>如果是在已经编辑过的电脑上，已经有clone文件夹了，那么，每次只要和远端同步一下就行了</li></ol><pre><code>git pull</code></pre>]]></content>
     
     
       
       
-    <summary type="html">&lt;h3 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h3&gt;&lt;h6 id=&quot;该文前提默认你已经使用hexo在GitHub上搭建起了自己的博客系统，强烈建议先搭建好博客再读此文！&quot;&gt;&lt;a href=&quot;#该文前</summary>
+    <summary type="html">&lt;h2 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;该文前提默认你已经使用hexo在GitHub上搭建起了自己的博客系统，强烈建议先搭建好博客再读此文！&lt;/p&gt;
+&lt;/</summary>
       
     
     
@@ -46,8 +48,8 @@
   
   <entry>
     <title>第一篇博客</title>
-    <link href="https://jason-we.github.io/2020/10/16/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/"/>
-    <id>https://jason-we.github.io/2020/10/16/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</id>
+    <link href="https://jason-we.github.io/2020/10/16/di-yi-pian-bo-ke/"/>
+    <id>https://jason-we.github.io/2020/10/16/di-yi-pian-bo-ke/</id>
     <published>2020-10-16T02:52:23.000Z</published>
     <updated>2020-10-16T07:48:12.648Z</updated>
     

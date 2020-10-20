@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>Hexo博客搭建之使用git分支实现多终端环境</title>
+      <link href="2020/10/19/hexo-bo-ke-da-jian-zhi-shi-yong-git-fen-zhi-shi-xian-duo-zhong-duan-huan-jing/"/>
+      <url>2020/10/19/hexo-bo-ke-da-jian-zhi-shi-yong-git-fen-zhi-shi-xian-duo-zhong-duan-huan-jing/</url>
+      
+        <content type="html"><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><blockquote><p>该文前提默认你已经使用hexo在GitHub上搭建起了自己的博客系统，强烈建议先搭建好博客再读此文！</p></blockquote><p>如果你现在在自己的笔记本上写的博客，部署在了网站上，那么你在家里用台式机，或者实验室的台式机，发现你电脑里面没有博客的文件，或者要换电脑了，最后不知道怎么移动文件，怎么办？</p><p>在这里我们就可以利用git的分支系统进行多终端工作了，这样每次打开不一样的电脑，只需要进行简单的配置和在github上把文件同步下来，就可以无缝操作了。</p><h2 id="hexo机制"><a href="#hexo机制" class="headerlink" title="hexo机制"></a>hexo机制</h2><p>由于<code>hexo d</code>上传部署到github的其实是hexo编译后的文件，是用来生成网页的，不包含源文件。</p><p>也就是上传的是在本地目录里自动生成的<code>.deploy_git</code>里面。</p><p>其他文件 ，包括我们写在source 里面的，和配置文件，主题文件，都没有上传到github</p><p>所以可以利用git的分支管理，将源文件上传到github的另一个分支即可。</p><h2 id="具体操作"><a href="#具体操作" class="headerlink" title="具体操作"></a>具体操作</h2><h3 id="新建分支"><a href="#新建分支" class="headerlink" title="新建分支"></a>新建分支</h3><p>首先在你的github pages项目仓库（如我的是<a href="https://github.com/Jason-We/Jason-We.github.io">Jason-We.github.io</a>新建一个分支，名称自拟，可以是hexo。</p><p>然后在这个仓库的settings中，选择默认分支为hexo（这样每次同步的时候就不用指定分支，比较方便）。</p><h3 id="本地克隆"><a href="#本地克隆" class="headerlink" title="本地克隆"></a>本地克隆</h3><p>在本地的任意你喜欢的目录下，将上述仓库克隆下来，因为默认分支已经设成了hexo，所以clone时只clone了hexo。接下来在克隆到本地的<code>ZJUFangzh.github.io</code>中，把除了.git 文件夹外的所有文件都删掉</p><p>把之前我们写的博客源文件全部复制过来，除了<code>.deploy_git</code>。这里应该说一句，复制过来的源文件应该有一个<code>.gitignore</code>，用来忽略一些不需要的文件，如果没有的话，自己新建一个，在里面写上如下，表示这些类型文件不需要git：</p><pre><code>.DS_StoreThumbs.dbdb.json*.lognode_modules/public/.deploy*/</code></pre><p><strong>注意，如果你之前克隆过theme中的主题文件，那么应该把主题文件中的<code>.git</code>文件夹删掉，因为git不能嵌套上传，最好是显示隐藏文件，检查一下有没有，否则上传的时候会出错，导致你的主题文件无法上传，这样你的配置在别的电脑上就用不了了。</strong></p><p>然后，</p><pre><code>git add .git commit –m "add branch"git push </code></pre><p>这样就上传完了，可以去你的github上看一看hexo分支有没有上传上去，其中<code>node_modules</code>、<code>public</code>、<code>db.json</code>已经被忽略掉了，没有关系，不需要上传的，因为在别的电脑上需要重新输入命令安装 。</p><h3 id="换电脑操作"><a href="#换电脑操作" class="headerlink" title="换电脑操作"></a>换电脑操作</h3><p>在你已经安装好了git、nodejs、hexo的机器上，再任意你喜欢的空文件夹下，将你上述push好的的仓库克隆到本机。进入到该目录后，执行：</p><pre><code>npm installnpm install hexo-deployer-git --save</code></pre><p>之后 ， 生成+部署：</p><pre><code>hexo ghexo d</code></pre><p>至此，已经搞定啦。接下来就可以在这台机器上愉快的写博客了。</p><pre><code>hexo new "你的文章名称"</code></pre><h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><ol><li>不要忘了，每次写完最好都把源文件上传一下</li></ol><pre><code>git add .git commit –m "xxxx"git push 123</code></pre><ol><li>如果是在已经编辑过的电脑上，已经有clone文件夹了，那么，每次只要和远端同步一下就行了</li></ol><pre><code>git pull</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> hexo </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+            <tag> git </tag>
+            
+            <tag> 博客搭建 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>第一篇博客</title>
+      <link href="2020/10/16/di-yi-pian-bo-ke/"/>
+      <url>2020/10/16/di-yi-pian-bo-ke/</url>
+      
+        <content type="html"><![CDATA[<h3 id="First-Blog"><a href="#First-Blog" class="headerlink" title="First Blog"></a>First Blog</h3><p>使用<a href="https://typora.io/">Typora</a>进行博客文章编写。</p><blockquote><h3 id="Readable-amp-Writable"><a href="#Readable-amp-Writable" class="headerlink" title="Readable &amp; Writable"></a>Readable &amp; Writable</h3><p>Typora gives you a seamless experience as both a reader and a writer. It removes the preview window, mode switcher, syntax symbols of markdown source code, and all other unnecessary distractions. Instead, it provides a real live preview feature to help you concentrate on the content itself.</p></blockquote>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> first </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
