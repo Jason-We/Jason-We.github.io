@@ -6,7 +6,7 @@
   <link href="https://jason-we.github.io/atom.xml" rel="self"/>
   
   <link href="https://jason-we.github.io/"/>
-  <updated>2020-10-20T00:34:46.581Z</updated>
+  <updated>2020-10-20T01:47:37.707Z</updated>
   <id>https://jason-we.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>懒人自述</title>
+    <link href="https://jason-we.github.io/2020/10/20/lan-ren-zi-shu/"/>
+    <id>https://jason-we.github.io/2020/10/20/lan-ren-zi-shu/</id>
+    <published>2020-10-20T00:54:06.000Z</published>
+    <updated>2020-10-20T01:47:37.707Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h2><p>一个真实的懒人，一向懒得写文章，做笔记，回顾大学的时光，图书馆没少泡，书没少看，习也没少学；奈何本人很笨，不能做到过目不忘，所以一直都是”狗熊掰棒子“，学多少忘多少，直到现在回首，惊觉大学四年没留下像样点的个人记录，不甚惋惜。所以，近来顿悟，想做一点记录，给自己留点痕迹，也是对逝去的时光一个交代吧。至于为什么选hexo，没别的，从众就完了 <span class="github-emoji"><span>😷</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f637.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p><h2 id="关于博客"><a href="#关于博客" class="headerlink" title="关于博客"></a>关于博客</h2><h3 id="初衷"><a href="#初衷" class="headerlink" title="初衷"></a>初衷</h3><p>最初的想法如上所言，做记录，所以就当是一个人记录本吧<span class="github-emoji"><span>😹</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f639.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>。而且本人虽说是科班出身，但是全身上下无不透露出一个”菜“字，所以，纯技术型博客俺也没辣个能力，自己本身就是天天面向CSDN、github编程的划水型选手，还是老老实实做记录吧。当然，工作的关系，可能还是少不了技术方面的内容，如果您一不小心看到了某篇拙作，还请您务必抱有怀疑批判的眼光，多多留言指正，鄙人先在这里拜谢了（抱拳）。</p><h3 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h3><ul><li>做记录，给自己留点痕迹，给时间一个交代。</li><li>锻炼文档撰写能力，养成一个写文档做记录的好习惯</li><li>通过做记录，让自己获得一种充实感</li><li>如果文章有幸帮助到了别人，还能收获一份帮助他人的快乐<span class="github-emoji"><span>☺</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/263a.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></li></ul><h2 id="对自己的一点期望"><a href="#对自己的一点期望" class="headerlink" title="对自己的一点期望"></a>对自己的一点期望</h2><p>万事开头难，希望这个开头我能坚持下来，度过难关，养成写文章的好习惯。也敦促自己去不断地学习，不要安于现状，走出舒适区。加油​，​奥力给<span class="github-emoji"><span>💪</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f4aa.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>💪</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f4aa.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;关于我&quot;&gt;&lt;a href=&quot;#关于我&quot; class=&quot;headerlink&quot; title=&quot;关于我&quot;&gt;&lt;/a&gt;关于我&lt;/h2&gt;&lt;p&gt;一个真实的懒人，一向懒得写文章，做笔记，回顾大学的时光，图书馆没少泡，书没少看，习也没少学；奈何本人很笨，不能做到过目不忘，所以一直</summary>
+      
+    
+    
+    
+    <category term="碎碎念" scheme="https://jason-we.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+    
+    <category term="博客" scheme="https://jason-we.github.io/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+    <category term="个人记录" scheme="https://jason-we.github.io/tags/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
   
   <entry>
     <title>Hexo博客搭建之使用git分支实现多终端环境</title>
