@@ -9,9 +9,7 @@ categories: 服务器
 
 ## 使用`nginx`作代理服务器
 
-在做前后端项目分离并部署到生产环境上时，可以选择`nginx`作前端项目的服务器，使用起来还是很方便的。同时，仅需简单的配置即可实现端接口转发，具体操作可以看之前的一篇blog： 
-
-[vue cli3.0+ 跨域配置]: https://jason-we.github.io/2020/10/28/vue-cli3-0-kua-yu-pei-zhi/
+在做前后端项目分离并部署到生产环境上时，可以选择`nginx`作前端项目的服务器，使用起来还是很方便的。同时，仅需简单的配置即可实现端接口转发，具体操作可以看之前的一篇blog: [vue cli3.0+ 跨域配置](https://jason-we.github.io/2020/10/28/vue-cli3-0-kua-yu-pei-zhi/)
 
 ## `nginx`常用命令
 
