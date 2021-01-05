@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hexo博客搭建之使用git分支实现多终端环境, blog">
+    <meta name="keywords" content="并发问题思考1, blog">
     <meta name="description" content="Code &amp; Life">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hexo博客搭建之使用git分支实现多终端环境 | JasonWe</title>
+    <title>并发问题思考1 | JasonWe</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/jason-we/jason-we.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/jason-we/jason-we.github.io/libs/awesome/css/all.css">
@@ -311,12 +311,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/jason-we/jason-we.github.io/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/jason-we/jason-we.github.io/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hexo博客搭建之使用git分支实现多终端环境</h1>
+                    <h1 class="description center-align post-title">并发问题思考1</h1>
                 </div>
             </div>
         </div>
@@ -433,31 +433,18 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/hexo/">
-                                <span class="chip bg-color">hexo</span>
+                            <a href="/tags/%E5%B9%B6%E5%8F%91/">
+                                <span class="chip bg-color">并发</span>
                             </a>
                         
-                            <a href="/tags/git/">
-                                <span class="chip bg-color">git</span>
-                            </a>
-                        
-                            <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">
-                                <span class="chip bg-color">博客搭建</span>
+                            <a href="/tags/%E6%80%9D%E8%80%83/">
+                                <span class="chip bg-color">思考</span>
                             </a>
                         
                     </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/hexo/" class="post-category">
-                                hexo
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -466,28 +453,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-10-19
+                    2020-12-10
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-10-20
+                    2021-01-05
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    897
+                    1.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    4 分
                 </div>
                 
 
@@ -502,51 +489,35 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><blockquote>
-<p>该文前提默认你已经使用hexo在GitHub上搭建起了自己的博客系统，强烈建议先搭建好博客再读此文！</p>
+                <blockquote>
+<p>最近开发项目以及学习过程中对于并发问题的解决方式没有清晰的思路。遂学习之，先做个记录吧。</p>
 </blockquote>
-<p>如果你现在在自己的笔记本上写的博客，部署在了网站上，那么你在家里用台式机，或者实验室的台式机，发现你电脑里面没有博客的文件，或者要换电脑了，最后不知道怎么移动文件，怎么办？</p>
-<p>在这里我们就可以利用git的分支系统进行多终端工作了，这样每次打开不一样的电脑，只需要进行简单的配置和在github上把文件同步下来，就可以无缝操作了。</p>
-<h2 id="hexo机制"><a href="#hexo机制" class="headerlink" title="hexo机制"></a>hexo机制</h2><p>由于<code>hexo d</code>上传部署到github的其实是hexo编译后的文件，是用来生成网页的，不包含源文件。</p>
-<p>也就是上传的是在本地目录里自动生成的<code>.deploy_git</code>里面。</p>
-<p>其他文件 ，包括我们写在source 里面的，和配置文件，主题文件，都没有上传到github</p>
-<p>所以可以利用git的分支管理，将源文件上传到github的另一个分支即可。</p>
-<h2 id="具体操作"><a href="#具体操作" class="headerlink" title="具体操作"></a>具体操作</h2><h3 id="新建分支"><a href="#新建分支" class="headerlink" title="新建分支"></a>新建分支</h3><p>首先在你的github pages项目仓库（如我的是<a target="_blank" rel="noopener" href="https://github.com/Jason-We/Jason-We.github.io">Jason-We.github.io</a>新建一个分支，名称自拟，可以是hexo。</p>
-<p>然后在这个仓库的settings中，选择默认分支为hexo（这样每次同步的时候就不用指定分支，比较方便）。</p>
-<h3 id="本地克隆"><a href="#本地克隆" class="headerlink" title="本地克隆"></a>本地克隆</h3><p>在本地的任意你喜欢的目录下，将上述仓库克隆下来，因为默认分支已经设成了hexo，所以clone时只clone了hexo。接下来在克隆到本地的<code>ZJUFangzh.github.io</code>中，把除了.git 文件夹外的所有文件都删掉</p>
-<p>把之前我们写的博客源文件全部复制过来，除了<code>.deploy_git</code>。这里应该说一句，复制过来的源文件应该有一个<code>.gitignore</code>，用来忽略一些不需要的文件，如果没有的话，自己新建一个，在里面写上如下，表示这些类型文件不需要git：</p>
-<pre><code>.DS_Store
-Thumbs.db
-db.json
-*.log
-node_modules/
-public/
-.deploy*/</code></pre>
-<p><strong>注意，如果你之前克隆过theme中的主题文件，那么应该把主题文件中的<code>.git</code>文件夹删掉，因为git不能嵌套上传，最好是显示隐藏文件，检查一下有没有，否则上传的时候会出错，导致你的主题文件无法上传，这样你的配置在别的电脑上就用不了了。</strong></p>
-<p>然后，</p>
-<pre><code>git add .
-git commit –m "add branch"
-git push </code></pre>
-<p>这样就上传完了，可以去你的github上看一看hexo分支有没有上传上去，其中<code>node_modules</code>、<code>public</code>、<code>db.json</code>已经被忽略掉了，没有关系，不需要上传的，因为在别的电脑上需要重新输入命令安装 。</p>
-<h3 id="换电脑操作"><a href="#换电脑操作" class="headerlink" title="换电脑操作"></a>换电脑操作</h3><p>在你已经安装好了git、nodejs、hexo的机器上，再任意你喜欢的空文件夹下，将你上述push好的的仓库克隆到本机。进入到该目录后，执行：</p>
-<pre><code>npm install
-npm install hexo-deployer-git --save</code></pre>
-<p>之后 ， 生成+部署：</p>
-<pre><code>hexo g
-hexo d</code></pre>
-<p>至此，已经搞定啦。接下来就可以在这台机器上愉快的写博客了。</p>
-<pre><code>hexo new "你的文章名称"</code></pre>
-<h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><ol>
-<li>不要忘了，每次写完最好都把源文件上传一下</li>
-</ol>
-<pre><code>git add .
-git commit –m "xxxx"
-git push 
-123</code></pre>
-<ol>
-<li>如果是在已经编辑过的电脑上，已经有clone文件夹了，那么，每次只要和远端同步一下就行了</li>
-</ol>
-<pre><code>git pull</code></pre>
+<h2 id="并发问题"><a href="#并发问题" class="headerlink" title="并发问题"></a>并发问题</h2><p>并发遇到的常见问题就是，多个客户端同时操作同一个资源，会出现一些意想不到的异常情况。这里的‘操作’如果都是查询，那问题还不大，如果这些操作包含了修改、新增、删除等会涉及到服务端数据库改动的，那么就会产生问题。</p>
+<p>并发的一般解决思路就是做控制。具体说，就是要在并发操作发生的环节里去做一些干预性的事儿，来让抢这个资源的请求们都消停一下，最终通过一定的干预让每个请求都能获得正常的响应，同时让这个被请求资源也舒舒服服的，避免发生不必要的意外zzz.</p>
+<h2 id="干预手段1"><a href="#干预手段1" class="headerlink" title="干预手段1"></a>干预手段1</h2><p>首先想到的是用数据库的锁策略，以mysql为例，InnoDB支持行级锁，在操作可能产生并发问题的资源时，可使用简单的语句控制，如可以开启事务start transaction，使用for update给资源加锁；具体的做法要结合使用的语言及框架查阅mysql官方文档，或百度之。for update作用于不同的表字段时加锁效果不同，对主键而言是行级锁，对普通字段则是表级锁，具体使用时还是要先做测试验证其加锁粒度。</p>
+<h2 id="干预手段2"><a href="#干预手段2" class="headerlink" title="干预手段2"></a>干预手段2</h2><p>网上看了一圈，发现有些文章说可以使用redis做并发控制，在这里按我的理解描述一下：</p>
+<p>在后端使用redis作缓存，把每一个客户端过来的请求都缓存起来，并设置缓存过期时间，这样一来，由于redis的唯一性以及单线程原子性，同样的请求每次只能有一个被缓存，这个被缓存的请求就是幸运儿，可以对这个资源进行操作了。其他的请求则都被redis拦在了门外。</p>
+<p>这个思路想一想其实就相当于让redis 当看大门的呗0.o 。在可能有并发问题出现的地方安置一个redis看门大爷，每次请求过来先去问redis大爷让不让进去（执行实际业务操作）；也还相当于把redis当成一把锁，去锁相应的资源。</p>
+<p>这个解决方案也存在一些局限或是问题：</p>
+<ul>
+<li>复杂性： 服务端处理请求时变复杂了一些（问题不大）</li>
+<li>唯一性判断问题： 根据请求判断唯一性，可能需要对请求做一些限制，或是截取请求的一部分。<ul>
+<li>这种解决方案会有局限，即无法解决不同请求产生的并发问题（只对不同用户同时进行同样的请求有效）</li>
+</ul>
+</li>
+<li>缓存过期时间问题：设置多久合适？  还是不设置，在完成请求后手动释放（删除redis表对应记录）</li>
+<li>重试机制问题：被拒之门外的请求作何处理？ 目前想的就是简单的返回给客户端一个提示 （eg：请稍等，过几秒再来吧？）</li>
+</ul>
+<h2 id="干预手段2-1"><a href="#干预手段2-1" class="headerlink" title="干预手段2.1"></a>干预手段2.1</h2><p>有了上面的思路，结合最近做的项目，又有了一个具体些的想法，就是用redis去锁数据库对应表的主键字段并自己设计加锁策略。对于操作mysql数据库来说，即将mysql表的唯一性字段（通常为主键）使用redis进行缓存，每当有请求过来时，首先去redis查询对应的主键字段有没有被锁住，（具体可使用redis的hset ？），若没有被锁则可以操作此资源，否则直接返回。（相当于行级锁）</p>
+<p>存在的问题：</p>
+<ul>
+<li>可靠性：若redis缓存挂掉，则不能控制并发。</li>
+<li>死锁： 若两个及以上的请求同时操作多个行的资源可能会产生死锁问题。</li>
+<li>系统开销： 使用redis无疑增加了系统开销。</li>
+<li>局限性：只适合简单的并发修改等操作</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文主要概括性的讲了并发问题的几个解决方案，即使用数据库层面的并发能力，使用redis进行并发控制的一些思路，具体的操作还需要动手实践，实践出真知。</p>
+<p>并发问题是开发中很常见也是一直以来都很棘手的问题，在学习并发理论知识的同时，更需要多实践并在实践中积累经验，才能有针对性的解决不同场景下的并发问题。</p>
 
             </div>
             <hr/>
@@ -572,7 +543,7 @@ git push
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://jason-we.github.io/2020/10/19/hexo-bo-ke-da-jian-zhi-shi-yong-git-fen-zhi-shi-xian-duo-zhong-duan-huan-jing/">https://jason-we.github.io/2020/10/19/hexo-bo-ke-da-jian-zhi-shi-yong-git-fen-zhi-shi-xian-duo-zhong-duan-huan-jing/</a>
+                    <a href="https://jason-we.github.io/2020/12/10/bing-fa-wen-ti-si-kao-1/">https://jason-we.github.io/2020/12/10/bing-fa-wen-ti-si-kao-1/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -610,16 +581,12 @@ git push
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/hexo/">
-                                    <span class="chip bg-color">hexo</span>
+                                <a href="/tags/%E5%B9%B6%E5%8F%91/">
+                                    <span class="chip bg-color">并发</span>
                                 </a>
                             
-                                <a href="/tags/git/">
-                                    <span class="chip bg-color">git</span>
-                                </a>
-                            
-                                <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">
-                                    <span class="chip bg-color">博客搭建</span>
+                                <a href="/tags/%E6%80%9D%E8%80%83/">
+                                    <span class="chip bg-color">思考</span>
                                 </a>
                             
                         </div>
@@ -1050,50 +1017,51 @@ git push
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/10/20/lan-ren-zi-shu/">
+                <a href="/2020/12/10/bing-fa-wen-ti-si-kao-1/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/jason-we/jason-we.github.io/medias/featureimages/6.jpg" class="responsive-img" alt="懒人自述">
+                        <img src="https://cdn.jsdelivr.net/gh/jason-we/jason-we.github.io/medias/featureimages/6.jpg" class="responsive-img" alt="并发问题思考1">
                         
-                        <span class="card-title">懒人自述</span>
+                        <span class="card-title">并发问题思考1</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            关于我一个真实的懒人，一向懒得写文章，做笔记，回顾大学的时光，图书馆没少泡，书没少看，习也没少学；奈何本人很笨，不能做到过目不忘，所以一直都是”狗熊掰棒子“，学多少忘多少，直到现在回首，惊觉大学四年没留下像样点的个人记录，不甚惋惜。所以，近
+                            
+最近开发项目以及学习过程中对于并发问题的解决方式没有清晰的思路。遂学习之，先做个记录吧。
+
+并发问题并发遇到的常见问题就是，多个客户端同时操作同一个资源，会出现一些意想不到的异常情况。这里的‘操作’如果都是查询，那问题还不大，如果这些操作
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-10-20
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-10
+                            </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/" class="post-category">
-                                    碎碎念
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Jason We
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%8D%9A%E5%AE%A2/">
-                        <span class="chip bg-color">博客</span>
+                    <a href="/tags/%E5%B9%B6%E5%8F%91/">
+                        <span class="chip bg-color">并发</span>
                     </a>
                     
-                    <a href="/tags/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">
-                        <span class="chip bg-color">个人记录</span>
+                    <a href="/tags/%E6%80%9D%E8%80%83/">
+                        <span class="chip bg-color">思考</span>
                     </a>
                     
                 </div>
@@ -1107,31 +1075,34 @@ git push
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/10/16/di-yi-pian-bo-ke/">
+                <a href="/2020/10/31/nginx-shi-yong-zong-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/jason-we/jason-we.github.io/medias/featureimages/13.jpg" class="responsive-img" alt="第一篇博客">
+                        <img src="https://cdn.jsdelivr.net/gh/jason-we/jason-we.github.io/medias/featureimages/3.jpg" class="responsive-img" alt="nginx使用总结">
                         
-                        <span class="card-title">第一篇博客</span>
+                        <span class="card-title">nginx使用总结</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            First Blog使用Typora进行博客文章编写。
-
-Readable &amp; WritableTypora gives you a seamless experience as both a reader and a writer
+                            使用nginx作代理服务器在做前后端项目分离并部署到生产环境上时，可以选择nginx作前端项目的服务器，使用起来还是很方便的。同时，仅需简单的配置即可实现端接口转发，具体操作可以看之前的一篇blog: vue cli3.0+ 跨域配置
+ng
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-10-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-10-31
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            Jason We
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="post-category">
+                                    服务器
+                                </a>
+                            
                             
                         </span>
                     </div>
@@ -1139,8 +1110,12 @@ Readable &amp; WritableTypora gives you a seamless experience as both a reader a
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/first/">
-                        <span class="chip bg-color">first</span>
+                    <a href="/tags/nginx/">
+                        <span class="chip bg-color">nginx</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+                        <span class="chip bg-color">服务器</span>
                     </a>
                     
                 </div>

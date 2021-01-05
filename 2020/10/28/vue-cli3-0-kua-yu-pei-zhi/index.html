@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hexo博客搭建之使用git分支实现多终端环境, blog">
+    <meta name="keywords" content="vue cli3.0+ 跨域配置, blog">
     <meta name="description" content="Code &amp; Life">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hexo博客搭建之使用git分支实现多终端环境 | JasonWe</title>
+    <title>vue cli3.0+ 跨域配置 | JasonWe</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/jason-we/jason-we.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/jason-we/jason-we.github.io/libs/awesome/css/all.css">
@@ -311,12 +311,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/jason-we/jason-we.github.io/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/jason-we/jason-we.github.io/medias/featureimages/4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hexo博客搭建之使用git分支实现多终端环境</h1>
+                    <h1 class="description center-align post-title">vue cli3.0+ 跨域配置</h1>
                 </div>
             </div>
         </div>
@@ -433,16 +433,16 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/hexo/">
-                                <span class="chip bg-color">hexo</span>
+                            <a href="/tags/nginx/">
+                                <span class="chip bg-color">nginx</span>
                             </a>
                         
-                            <a href="/tags/git/">
-                                <span class="chip bg-color">git</span>
+                            <a href="/tags/vue/">
+                                <span class="chip bg-color">vue</span>
                             </a>
                         
-                            <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">
-                                <span class="chip bg-color">博客搭建</span>
+                            <a href="/tags/axios/">
+                                <span class="chip bg-color">axios</span>
                             </a>
                         
                     </div>
@@ -453,8 +453,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/hexo/" class="post-category">
-                                hexo
+                            <a href="/categories/vue/" class="post-category">
+                                vue
                             </a>
                         
                     </div>
@@ -466,28 +466,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-10-19
+                    2020-10-28
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-10-20
+                    2020-11-12
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    897
+                    370
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    1 分
                 </div>
                 
 
@@ -502,51 +502,60 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><blockquote>
-<p>该文前提默认你已经使用hexo在GitHub上搭建起了自己的博客系统，强烈建议先搭建好博客再读此文！</p>
+                <h3 id="配置baseURL"><a href="#配置baseURL" class="headerlink" title="配置baseURL"></a>配置baseURL</h3><p>根据项目axios的引入方式， 可以分为两种配置方式：</p>
+<ul>
+<li><p>如果axios 是npm install 加入的，那可以在在项目的main.js中配置：</p>
+<p><code>Axios.defaults.baseURL = '/api'</code></p>
+</li>
+<li><p>如果是通过vue@cli  ，即 vue add axios 加入的，则可以在plugins文件夹中的axios.js中配置：</p>
+<pre><code>let config = {
+  baseURL: '/api'
+  // baseURL: process.env.baseURL || process.env.apiUrl || ""
+  // timeout: 60 * 1000, // Timeout
+  // withCredentials: true, // Check cross-site Access-Control
+};</code></pre>
+</li>
+</ul>
+<h3 id="配置axios跨域"><a href="#配置axios跨域" class="headerlink" title="配置axios跨域"></a>配置axios跨域</h3><p>配置完baseURL后，就可以根据baseURL进行跨域配置了。</p>
+<ul>
+<li><p>开发环境</p>
+<p>新建vue.config.js，并在其中配置跨域方案：</p>
+<pre><code>module.exports = {
+  devServer: {   //这里解决开发环境的跨域问题， 生产环境的跨域问题需要再nginx服务器解决
+    proxy: {
+      '/api': {
+        // 此处的写法，目的是为了 将 /api 替换成 http://localhost:8088/
+        target: 'http://localhost:8088/',
+        // 允许跨域
+        changeOrigin: true,
+        ws: true,
+        pathRewrite: {
+          '^/api': ''
+        }
+      }
+    }
+  }
+}</code></pre>
+</li>
+</ul>
+<ul>
+<li><p>生产环境</p>
+<p>使用nginx 服务器， 配置文件nginx.conf 中增加server的配置 ：</p>
+<pre><code>listen       8081;   
+server_name  localhost;
+location / {
+   root   html; #这里的html是指 nginx根目录的html文件夹，即你项目打包好的dist目录下的文件全部拷贝至这里，（要先将html目录下的文件删掉）
+   index  index.html index.htm;
+   try_files $uri $uri/ /index.html;
+}
+location /api/ {               #这里/api/的配置和上面的baseURL的配置是对应的。
+   proxy_pass   http://localhost:8088/;   #这里的配置表示将请求都转发至这个地址
+}</code></pre>
+</li>
+</ul>
+<blockquote>
+<p>ok，以上就是使用vue cli 3.0+ 开发vue项目时配置axios跨域的常见解决办法啦。留作备忘！</p>
 </blockquote>
-<p>如果你现在在自己的笔记本上写的博客，部署在了网站上，那么你在家里用台式机，或者实验室的台式机，发现你电脑里面没有博客的文件，或者要换电脑了，最后不知道怎么移动文件，怎么办？</p>
-<p>在这里我们就可以利用git的分支系统进行多终端工作了，这样每次打开不一样的电脑，只需要进行简单的配置和在github上把文件同步下来，就可以无缝操作了。</p>
-<h2 id="hexo机制"><a href="#hexo机制" class="headerlink" title="hexo机制"></a>hexo机制</h2><p>由于<code>hexo d</code>上传部署到github的其实是hexo编译后的文件，是用来生成网页的，不包含源文件。</p>
-<p>也就是上传的是在本地目录里自动生成的<code>.deploy_git</code>里面。</p>
-<p>其他文件 ，包括我们写在source 里面的，和配置文件，主题文件，都没有上传到github</p>
-<p>所以可以利用git的分支管理，将源文件上传到github的另一个分支即可。</p>
-<h2 id="具体操作"><a href="#具体操作" class="headerlink" title="具体操作"></a>具体操作</h2><h3 id="新建分支"><a href="#新建分支" class="headerlink" title="新建分支"></a>新建分支</h3><p>首先在你的github pages项目仓库（如我的是<a target="_blank" rel="noopener" href="https://github.com/Jason-We/Jason-We.github.io">Jason-We.github.io</a>新建一个分支，名称自拟，可以是hexo。</p>
-<p>然后在这个仓库的settings中，选择默认分支为hexo（这样每次同步的时候就不用指定分支，比较方便）。</p>
-<h3 id="本地克隆"><a href="#本地克隆" class="headerlink" title="本地克隆"></a>本地克隆</h3><p>在本地的任意你喜欢的目录下，将上述仓库克隆下来，因为默认分支已经设成了hexo，所以clone时只clone了hexo。接下来在克隆到本地的<code>ZJUFangzh.github.io</code>中，把除了.git 文件夹外的所有文件都删掉</p>
-<p>把之前我们写的博客源文件全部复制过来，除了<code>.deploy_git</code>。这里应该说一句，复制过来的源文件应该有一个<code>.gitignore</code>，用来忽略一些不需要的文件，如果没有的话，自己新建一个，在里面写上如下，表示这些类型文件不需要git：</p>
-<pre><code>.DS_Store
-Thumbs.db
-db.json
-*.log
-node_modules/
-public/
-.deploy*/</code></pre>
-<p><strong>注意，如果你之前克隆过theme中的主题文件，那么应该把主题文件中的<code>.git</code>文件夹删掉，因为git不能嵌套上传，最好是显示隐藏文件，检查一下有没有，否则上传的时候会出错，导致你的主题文件无法上传，这样你的配置在别的电脑上就用不了了。</strong></p>
-<p>然后，</p>
-<pre><code>git add .
-git commit –m "add branch"
-git push </code></pre>
-<p>这样就上传完了，可以去你的github上看一看hexo分支有没有上传上去，其中<code>node_modules</code>、<code>public</code>、<code>db.json</code>已经被忽略掉了，没有关系，不需要上传的，因为在别的电脑上需要重新输入命令安装 。</p>
-<h3 id="换电脑操作"><a href="#换电脑操作" class="headerlink" title="换电脑操作"></a>换电脑操作</h3><p>在你已经安装好了git、nodejs、hexo的机器上，再任意你喜欢的空文件夹下，将你上述push好的的仓库克隆到本机。进入到该目录后，执行：</p>
-<pre><code>npm install
-npm install hexo-deployer-git --save</code></pre>
-<p>之后 ， 生成+部署：</p>
-<pre><code>hexo g
-hexo d</code></pre>
-<p>至此，已经搞定啦。接下来就可以在这台机器上愉快的写博客了。</p>
-<pre><code>hexo new "你的文章名称"</code></pre>
-<h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><ol>
-<li>不要忘了，每次写完最好都把源文件上传一下</li>
-</ol>
-<pre><code>git add .
-git commit –m "xxxx"
-git push 
-123</code></pre>
-<ol>
-<li>如果是在已经编辑过的电脑上，已经有clone文件夹了，那么，每次只要和远端同步一下就行了</li>
-</ol>
-<pre><code>git pull</code></pre>
 
             </div>
             <hr/>
@@ -572,7 +581,7 @@ git push
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://jason-we.github.io/2020/10/19/hexo-bo-ke-da-jian-zhi-shi-yong-git-fen-zhi-shi-xian-duo-zhong-duan-huan-jing/">https://jason-we.github.io/2020/10/19/hexo-bo-ke-da-jian-zhi-shi-yong-git-fen-zhi-shi-xian-duo-zhong-duan-huan-jing/</a>
+                    <a href="https://jason-we.github.io/2020/10/28/vue-cli3-0-kua-yu-pei-zhi/">https://jason-we.github.io/2020/10/28/vue-cli3-0-kua-yu-pei-zhi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -610,16 +619,16 @@ git push
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/hexo/">
-                                    <span class="chip bg-color">hexo</span>
+                                <a href="/tags/nginx/">
+                                    <span class="chip bg-color">nginx</span>
                                 </a>
                             
-                                <a href="/tags/git/">
-                                    <span class="chip bg-color">git</span>
+                                <a href="/tags/vue/">
+                                    <span class="chip bg-color">vue</span>
                                 </a>
                             
-                                <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">
-                                    <span class="chip bg-color">博客搭建</span>
+                                <a href="/tags/axios/">
+                                    <span class="chip bg-color">axios</span>
                                 </a>
                             
                         </div>
@@ -1054,6 +1063,60 @@ git push
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
+                <a href="/2020/10/31/nginx-shi-yong-zong-jie/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/jason-we/jason-we.github.io/medias/featureimages/3.jpg" class="responsive-img" alt="nginx使用总结">
+                        
+                        <span class="card-title">nginx使用总结</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            使用nginx作代理服务器在做前后端项目分离并部署到生产环境上时，可以选择nginx作前端项目的服务器，使用起来还是很方便的。同时，仅需简单的配置即可实现端接口转发，具体操作可以看之前的一篇blog: vue cli3.0+ 跨域配置
+ng
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-10-31
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="post-category">
+                                    服务器
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/nginx/">
+                        <span class="chip bg-color">nginx</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+                        <span class="chip bg-color">服务器</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
                 <a href="/2020/10/20/lan-ren-zi-shu/">
                     <div class="card-image">
                         
@@ -1070,9 +1133,9 @@ git push
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-10-20
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-10-20
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1094,53 +1157,6 @@ git push
                     
                     <a href="/tags/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">
                         <span class="chip bg-color">个人记录</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/10/16/di-yi-pian-bo-ke/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="https://cdn.jsdelivr.net/gh/jason-we/jason-we.github.io/medias/featureimages/13.jpg" class="responsive-img" alt="第一篇博客">
-                        
-                        <span class="card-title">第一篇博客</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            First Blog使用Typora进行博客文章编写。
-
-Readable &amp; WritableTypora gives you a seamless experience as both a reader and a writer
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-10-16
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            Jason We
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/first/">
-                        <span class="chip bg-color">first</span>
                     </a>
                     
                 </div>

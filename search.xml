@@ -4,6 +4,83 @@
   
     
     <entry>
+      <title>并发问题思考1</title>
+      <link href="2020/12/10/bing-fa-wen-ti-si-kao-1/"/>
+      <url>2020/12/10/bing-fa-wen-ti-si-kao-1/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>最近开发项目以及学习过程中对于并发问题的解决方式没有清晰的思路。遂学习之，先做个记录吧。</p></blockquote><h2 id="并发问题"><a href="#并发问题" class="headerlink" title="并发问题"></a>并发问题</h2><p>并发遇到的常见问题就是，多个客户端同时操作同一个资源，会出现一些意想不到的异常情况。这里的‘操作’如果都是查询，那问题还不大，如果这些操作包含了修改、新增、删除等会涉及到服务端数据库改动的，那么就会产生问题。</p><p>并发的一般解决思路就是做控制。具体说，就是要在并发操作发生的环节里去做一些干预性的事儿，来让抢这个资源的请求们都消停一下，最终通过一定的干预让每个请求都能获得正常的响应，同时让这个被请求资源也舒舒服服的，避免发生不必要的意外zzz.</p><h2 id="干预手段1"><a href="#干预手段1" class="headerlink" title="干预手段1"></a>干预手段1</h2><p>首先想到的是用数据库的锁策略，以mysql为例，InnoDB支持行级锁，在操作可能产生并发问题的资源时，可使用简单的语句控制，如可以开启事务start transaction，使用for update给资源加锁；具体的做法要结合使用的语言及框架查阅mysql官方文档，或百度之。for update作用于不同的表字段时加锁效果不同，对主键而言是行级锁，对普通字段则是表级锁，具体使用时还是要先做测试验证其加锁粒度。</p><h2 id="干预手段2"><a href="#干预手段2" class="headerlink" title="干预手段2"></a>干预手段2</h2><p>网上看了一圈，发现有些文章说可以使用redis做并发控制，在这里按我的理解描述一下：</p><p>在后端使用redis作缓存，把每一个客户端过来的请求都缓存起来，并设置缓存过期时间，这样一来，由于redis的唯一性以及单线程原子性，同样的请求每次只能有一个被缓存，这个被缓存的请求就是幸运儿，可以对这个资源进行操作了。其他的请求则都被redis拦在了门外。</p><p>这个思路想一想其实就相当于让redis 当看大门的呗0.o 。在可能有并发问题出现的地方安置一个redis看门大爷，每次请求过来先去问redis大爷让不让进去（执行实际业务操作）；也还相当于把redis当成一把锁，去锁相应的资源。</p><p>这个解决方案也存在一些局限或是问题：</p><ul><li>复杂性： 服务端处理请求时变复杂了一些（问题不大）</li><li>唯一性判断问题： 根据请求判断唯一性，可能需要对请求做一些限制，或是截取请求的一部分。<ul><li>这种解决方案会有局限，即无法解决不同请求产生的并发问题（只对不同用户同时进行同样的请求有效）</li></ul></li><li>缓存过期时间问题：设置多久合适？  还是不设置，在完成请求后手动释放（删除redis表对应记录）</li><li>重试机制问题：被拒之门外的请求作何处理？ 目前想的就是简单的返回给客户端一个提示 （eg：请稍等，过几秒再来吧？）</li></ul><h2 id="干预手段2-1"><a href="#干预手段2-1" class="headerlink" title="干预手段2.1"></a>干预手段2.1</h2><p>有了上面的思路，结合最近做的项目，又有了一个具体些的想法，就是用redis去锁数据库对应表的主键字段并自己设计加锁策略。对于操作mysql数据库来说，即将mysql表的唯一性字段（通常为主键）使用redis进行缓存，每当有请求过来时，首先去redis查询对应的主键字段有没有被锁住，（具体可使用redis的hset ？），若没有被锁则可以操作此资源，否则直接返回。（相当于行级锁）</p><p>存在的问题：</p><ul><li>可靠性：若redis缓存挂掉，则不能控制并发。</li><li>死锁： 若两个及以上的请求同时操作多个行的资源可能会产生死锁问题。</li><li>系统开销： 使用redis无疑增加了系统开销。</li><li>局限性：只适合简单的并发修改等操作</li></ul><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文主要概括性的讲了并发问题的几个解决方案，即使用数据库层面的并发能力，使用redis进行并发控制的一些思路，具体的操作还需要动手实践，实践出真知。</p><p>并发问题是开发中很常见也是一直以来都很棘手的问题，在学习并发理论知识的同时，更需要多实践并在实践中积累经验，才能有针对性的解决不同场景下的并发问题。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 并发 </tag>
+            
+            <tag> 思考 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>nginx使用总结</title>
+      <link href="2020/10/31/nginx-shi-yong-zong-jie/"/>
+      <url>2020/10/31/nginx-shi-yong-zong-jie/</url>
+      
+        <content type="html"><![CDATA[<h2 id="使用nginx作代理服务器"><a href="#使用nginx作代理服务器" class="headerlink" title="使用nginx作代理服务器"></a>使用<code>nginx</code>作代理服务器</h2><p>在做前后端项目分离并部署到生产环境上时，可以选择<code>nginx</code>作前端项目的服务器，使用起来还是很方便的。同时，仅需简单的配置即可实现端接口转发，具体操作可以看之前的一篇blog: <a href="https://jason-we.github.io/2020/10/28/vue-cli3-0-kua-yu-pei-zhi/">vue cli3.0+ 跨域配置</a></p><h2 id="nginx常用命令"><a href="#nginx常用命令" class="headerlink" title="nginx常用命令"></a><code>nginx</code>常用命令</h2><pre><code>--nginx 启停命令start nginx.exe                     //启动nginxnginx.exe -s stop                   //停止nginxnginx.exe -s quit                   //优雅停止nginx，有连接时会等连接请求完成再杀死worker进程  nginx.exe -s reload                //重启，会重新加载nginx的配置文件（*linux相应命令去掉 ".exe" 后缀即可）--nginx 其他命令nginx -v            查看版本  nginx -t            检查nginx的配置文件nginx -h            查看帮助信息nginx -V            详细版本信息，包括编译参数 nginx  -c filename  指定配置文件-- Linux 下nginx常用运维命令ps -ef |grep nginx  查看nginx的进程号whereis nginx       查看nginx安装路径配置nginx开机自启动$ sudo systemctl start nginx #systemd  OR $ sudo service nginx start   #sysvinit </code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 服务器 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> nginx </tag>
+            
+            <tag> 服务器 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>vue cli3.0+ 跨域配置</title>
+      <link href="2020/10/28/vue-cli3-0-kua-yu-pei-zhi/"/>
+      <url>2020/10/28/vue-cli3-0-kua-yu-pei-zhi/</url>
+      
+        <content type="html"><![CDATA[<h3 id="配置baseURL"><a href="#配置baseURL" class="headerlink" title="配置baseURL"></a>配置baseURL</h3><p>根据项目axios的引入方式， 可以分为两种配置方式：</p><ul><li><p>如果axios 是npm install 加入的，那可以在在项目的main.js中配置：</p><p><code>Axios.defaults.baseURL = '/api'</code></p></li><li><p>如果是通过vue@cli  ，即 vue add axios 加入的，则可以在plugins文件夹中的axios.js中配置：</p><pre><code>let config = {  baseURL: '/api'  // baseURL: process.env.baseURL || process.env.apiUrl || ""  // timeout: 60 * 1000, // Timeout  // withCredentials: true, // Check cross-site Access-Control};</code></pre></li></ul><h3 id="配置axios跨域"><a href="#配置axios跨域" class="headerlink" title="配置axios跨域"></a>配置axios跨域</h3><p>配置完baseURL后，就可以根据baseURL进行跨域配置了。</p><ul><li><p>开发环境</p><p>新建vue.config.js，并在其中配置跨域方案：</p><pre><code>module.exports = {  devServer: {   //这里解决开发环境的跨域问题， 生产环境的跨域问题需要再nginx服务器解决    proxy: {      '/api': {        // 此处的写法，目的是为了 将 /api 替换成 http://localhost:8088/        target: 'http://localhost:8088/',        // 允许跨域        changeOrigin: true,        ws: true,        pathRewrite: {          '^/api': ''        }      }    }  }}</code></pre></li></ul><ul><li><p>生产环境</p><p>使用nginx 服务器， 配置文件nginx.conf 中增加server的配置 ：</p><pre><code>listen       8081;   server_name  localhost;location / {   root   html; #这里的html是指 nginx根目录的html文件夹，即你项目打包好的dist目录下的文件全部拷贝至这里，（要先将html目录下的文件删掉）   index  index.html index.htm;   try_files $uri $uri/ /index.html;}location /api/ {               #这里/api/的配置和上面的baseURL的配置是对应的。   proxy_pass   http://localhost:8088/;   #这里的配置表示将请求都转发至这个地址}</code></pre></li></ul><blockquote><p>ok，以上就是使用vue cli 3.0+ 开发vue项目时配置axios跨域的常见解决办法啦。留作备忘！</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> vue </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> nginx </tag>
+            
+            <tag> vue </tag>
+            
+            <tag> axios </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>懒人自述</title>
       <link href="2020/10/20/lan-ren-zi-shu/"/>
       <url>2020/10/20/lan-ren-zi-shu/</url>
