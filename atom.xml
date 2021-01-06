@@ -6,7 +6,7 @@
   <link href="https://jason-we.github.io/atom.xml" rel="self"/>
   
   <link href="https://jason-we.github.io/"/>
-  <updated>2021-01-06T01:24:46.240Z</updated>
+  <updated>2021-01-06T01:29:59.885Z</updated>
   <id>https://jason-we.github.io/</id>
   
   <author>
@@ -21,14 +21,17 @@
     <link href="https://jason-we.github.io/2021/01/06/npm-ming-ling-ji-lu/"/>
     <id>https://jason-we.github.io/2021/01/06/npm-ming-ling-ji-lu/</id>
     <published>2021-01-06T00:59:42.000Z</published>
-    <updated>2021-01-06T01:24:46.240Z</updated>
+    <updated>2021-01-06T01:29:59.885Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="npm-install"><a href="#npm-install" class="headerlink" title="npm install"></a>npm install</h2><pre><code>npm install               #(with no args, in package.json dir)npm install moduleName    # 安装模块到项目目录下npm install -g moduleName # -g 的意思是将模块安装到全局，具体安装到磁盘哪个位置，要看 npm config prefix 的位置。npm install --save moduleName   # --save 的意思是将模块安装到项目目录下，并在package文件的dependencies节点写入依赖。npm install --save-dev moduleName # --save-dev 的意思是将模块安装到项目目录下，并在package文件的devDependencies节点写入依赖。</code></pre><p>使用原则：项目部署运行时需要的包使用 –save ， 否则使用 –save-dev  </p><h2 id="npm-uninstall"><a href="#npm-uninstall" class="headerlink" title="npm uninstall"></a>npm uninstall</h2><p>使用方法： 和install 一样， 只不过功能不同，uninstall 是卸载项目的依赖包</p>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>npm中文文档 ： <a href="https://www.npmjs.cn/">https://www.npmjs.cn/</a></p></blockquote><h2 id="npm-install"><a href="#npm-install" class="headerlink" title="npm install"></a>npm install</h2><pre><code>npm install               #(with no args, in package.json dir)npm install moduleName    # 安装模块到项目目录下npm install -g moduleName # -g 的意思是将模块安装到全局，具体安装到磁盘哪个位置，要看 npm config prefix 的位置。npm install --save moduleName   # --save 的意思是将模块安装到项目目录下，并在package文件的dependencies节点写入依赖。npm install --save-dev moduleName # --save-dev 的意思是将模块安装到项目目录下，并在package文件的devDependencies节点写入依赖。</code></pre><p>使用原则：项目部署运行时需要的包使用 –save ， 否则使用 –save-dev  </p><h2 id="npm-uninstall"><a href="#npm-uninstall" class="headerlink" title="npm uninstall"></a>npm uninstall</h2><p>使用方法： 和install 一样， 只不过功能不同，uninstall 是卸载项目的依赖包</p>]]></content>
     
     
       
       
-    <summary type="html">&lt;h2 id=&quot;npm-install&quot;&gt;&lt;a href=&quot;#npm-install&quot; class=&quot;headerlink&quot; title=&quot;npm install&quot;&gt;&lt;/a&gt;npm install&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;npm install               </summary>
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;npm中文文档 ： &lt;a href=&quot;https://www.npmjs.cn/&quot;&gt;https://www.npmjs.cn/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;npm-install&quot;&gt;&lt;a href=&quot;#npm-ins</summary>
       
     
     
