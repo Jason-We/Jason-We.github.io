@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hexo博客搭建之使用git分支实现多终端环境, blog">
+    <meta name="keywords" content="npm命令记录, blog">
     <meta name="description" content="Code &amp; Life">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hexo博客搭建之使用git分支实现多终端环境 | JasonWe</title>
+    <title>npm命令记录 | JasonWe</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/jason-we/jason-we.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/jason-we/jason-we.github.io/libs/awesome/css/all.css">
@@ -311,12 +311,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/jason-we/jason-we.github.io/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/jason-we/jason-we.github.io/medias/featureimages/9.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hexo博客搭建之使用git分支实现多终端环境</h1>
+                    <h1 class="description center-align post-title">npm命令记录</h1>
                 </div>
             </div>
         </div>
@@ -433,31 +433,14 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/hexo/">
-                                <span class="chip bg-color">hexo</span>
-                            </a>
-                        
-                            <a href="/tags/git/">
-                                <span class="chip bg-color">git</span>
-                            </a>
-                        
-                            <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">
-                                <span class="chip bg-color">博客搭建</span>
+                            <a href="/tags/npm/">
+                                <span class="chip bg-color">npm</span>
                             </a>
                         
                     </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/hexo/" class="post-category">
-                                hexo
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -466,28 +449,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-10-19
+                    2021-01-06
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-10-20
+                    2021-01-06
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    897
+                    176
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    1 分
                 </div>
                 
 
@@ -502,51 +485,13 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><blockquote>
-<p>该文前提默认你已经使用hexo在GitHub上搭建起了自己的博客系统，强烈建议先搭建好博客再读此文！</p>
-</blockquote>
-<p>如果你现在在自己的笔记本上写的博客，部署在了网站上，那么你在家里用台式机，或者实验室的台式机，发现你电脑里面没有博客的文件，或者要换电脑了，最后不知道怎么移动文件，怎么办？</p>
-<p>在这里我们就可以利用git的分支系统进行多终端工作了，这样每次打开不一样的电脑，只需要进行简单的配置和在github上把文件同步下来，就可以无缝操作了。</p>
-<h2 id="hexo机制"><a href="#hexo机制" class="headerlink" title="hexo机制"></a>hexo机制</h2><p>由于<code>hexo d</code>上传部署到github的其实是hexo编译后的文件，是用来生成网页的，不包含源文件。</p>
-<p>也就是上传的是在本地目录里自动生成的<code>.deploy_git</code>里面。</p>
-<p>其他文件 ，包括我们写在source 里面的，和配置文件，主题文件，都没有上传到github</p>
-<p>所以可以利用git的分支管理，将源文件上传到github的另一个分支即可。</p>
-<h2 id="具体操作"><a href="#具体操作" class="headerlink" title="具体操作"></a>具体操作</h2><h3 id="新建分支"><a href="#新建分支" class="headerlink" title="新建分支"></a>新建分支</h3><p>首先在你的github pages项目仓库（如我的是<a target="_blank" rel="noopener" href="https://github.com/Jason-We/Jason-We.github.io">Jason-We.github.io</a>新建一个分支，名称自拟，可以是hexo。</p>
-<p>然后在这个仓库的settings中，选择默认分支为hexo（这样每次同步的时候就不用指定分支，比较方便）。</p>
-<h3 id="本地克隆"><a href="#本地克隆" class="headerlink" title="本地克隆"></a>本地克隆</h3><p>在本地的任意你喜欢的目录下，将上述仓库克隆下来，因为默认分支已经设成了hexo，所以clone时只clone了hexo。接下来在克隆到本地的<code>ZJUFangzh.github.io</code>中，把除了.git 文件夹外的所有文件都删掉</p>
-<p>把之前我们写的博客源文件全部复制过来，除了<code>.deploy_git</code>。这里应该说一句，复制过来的源文件应该有一个<code>.gitignore</code>，用来忽略一些不需要的文件，如果没有的话，自己新建一个，在里面写上如下，表示这些类型文件不需要git：</p>
-<pre><code>.DS_Store
-Thumbs.db
-db.json
-*.log
-node_modules/
-public/
-.deploy*/</code></pre>
-<p><strong>注意，如果你之前克隆过theme中的主题文件，那么应该把主题文件中的<code>.git</code>文件夹删掉，因为git不能嵌套上传，最好是显示隐藏文件，检查一下有没有，否则上传的时候会出错，导致你的主题文件无法上传，这样你的配置在别的电脑上就用不了了。</strong></p>
-<p>然后，</p>
-<pre><code>git add .
-git commit –m "add branch"
-git push </code></pre>
-<p>这样就上传完了，可以去你的github上看一看hexo分支有没有上传上去，其中<code>node_modules</code>、<code>public</code>、<code>db.json</code>已经被忽略掉了，没有关系，不需要上传的，因为在别的电脑上需要重新输入命令安装 。</p>
-<h3 id="换电脑操作"><a href="#换电脑操作" class="headerlink" title="换电脑操作"></a>换电脑操作</h3><p>在你已经安装好了git、nodejs、hexo的机器上，再任意你喜欢的空文件夹下，将你上述push好的的仓库克隆到本机。进入到该目录后，执行：</p>
-<pre><code>npm install
-npm install hexo-deployer-git --save</code></pre>
-<p>之后 ， 生成+部署：</p>
-<pre><code>hexo g
-hexo d</code></pre>
-<p>至此，已经搞定啦。接下来就可以在这台机器上愉快的写博客了。</p>
-<pre><code>hexo new "你的文章名称"</code></pre>
-<h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><ol>
-<li>不要忘了，每次写完最好都把源文件上传一下</li>
-</ol>
-<pre><code>git add .
-git commit –m "xxxx"
-git push 
-123</code></pre>
-<ol>
-<li>如果是在已经编辑过的电脑上，已经有clone文件夹了，那么，每次只要和远端同步一下就行了</li>
-</ol>
-<pre><code>git pull</code></pre>
+                <h2 id="npm-install"><a href="#npm-install" class="headerlink" title="npm install"></a>npm install</h2><pre><code>npm install               #(with no args, in package.json dir)
+npm install moduleName    # 安装模块到项目目录下
+npm install -g moduleName # -g 的意思是将模块安装到全局，具体安装到磁盘哪个位置，要看 npm config prefix 的位置。
+npm install --save moduleName   # --save 的意思是将模块安装到项目目录下，并在package文件的dependencies节点写入依赖。
+npm install --save-dev moduleName # --save-dev 的意思是将模块安装到项目目录下，并在package文件的devDependencies节点写入依赖。</code></pre>
+<p>使用原则：项目部署运行时需要的包使用 –save ， 否则使用 –save-dev  </p>
+<h2 id="npm-uninstall"><a href="#npm-uninstall" class="headerlink" title="npm uninstall"></a>npm uninstall</h2><p>使用方法： 和install 一样， 只不过功能不同，uninstall 是卸载项目的依赖包</p>
 
             </div>
             <hr/>
@@ -572,7 +517,7 @@ git push
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://jason-we.github.io/2020/10/19/hexo-bo-ke-da-jian-zhi-shi-yong-git-fen-zhi-shi-xian-duo-zhong-duan-huan-jing/">https://jason-we.github.io/2020/10/19/hexo-bo-ke-da-jian-zhi-shi-yong-git-fen-zhi-shi-xian-duo-zhong-duan-huan-jing/</a>
+                    <a href="https://jason-we.github.io/2021/01/06/npm-ming-ling-ji-lu/">https://jason-we.github.io/2021/01/06/npm-ming-ling-ji-lu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -610,16 +555,8 @@ git push
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/hexo/">
-                                    <span class="chip bg-color">hexo</span>
-                                </a>
-                            
-                                <a href="/tags/git/">
-                                    <span class="chip bg-color">git</span>
-                                </a>
-                            
-                                <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">
-                                    <span class="chip bg-color">博客搭建</span>
+                                <a href="/tags/npm/">
+                                    <span class="chip bg-color">npm</span>
                                 </a>
                             
                         </div>
@@ -1050,50 +987,46 @@ git push
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/10/20/lan-ren-zi-shu/">
+                <a href="/2021/01/06/npm-ming-ling-ji-lu/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/jason-we/jason-we.github.io/medias/featureimages/6.jpg" class="responsive-img" alt="懒人自述">
+                        <img src="https://cdn.jsdelivr.net/gh/jason-we/jason-we.github.io/medias/featureimages/9.jpg" class="responsive-img" alt="npm命令记录">
                         
-                        <span class="card-title">懒人自述</span>
+                        <span class="card-title">npm命令记录</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            关于我一个真实的懒人，一向懒得写文章，做笔记，回顾大学的时光，图书馆没少泡，书没少看，习也没少学；奈何本人很笨，不能做到过目不忘，所以一直都是”狗熊掰棒子“，学多少忘多少，直到现在回首，惊觉大学四年没留下像样点的个人记录，不甚惋惜。所以，近
+                            npm installnpm install               #(with no args, in package.json dir)
+npm install moduleName    # 安装模块到项目目录下
+npm ins
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-10-20
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-01-06
+                            </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/" class="post-category">
-                                    碎碎念
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Jason We
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%8D%9A%E5%AE%A2/">
-                        <span class="chip bg-color">博客</span>
-                    </a>
-                    
-                    <a href="/tags/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">
-                        <span class="chip bg-color">个人记录</span>
+                    <a href="/tags/npm/">
+                        <span class="chip bg-color">npm</span>
                     </a>
                     
                 </div>
@@ -1107,26 +1040,27 @@ git push
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/10/16/di-yi-pian-bo-ke/">
+                <a href="/2020/12/10/bing-fa-wen-ti-si-kao-1/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/jason-we/jason-we.github.io/medias/featureimages/13.jpg" class="responsive-img" alt="第一篇博客">
+                        <img src="https://cdn.jsdelivr.net/gh/jason-we/jason-we.github.io/medias/featureimages/6.jpg" class="responsive-img" alt="并发问题思考1">
                         
-                        <span class="card-title">第一篇博客</span>
+                        <span class="card-title">并发问题思考1</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            First Blog使用Typora进行博客文章编写。
+                            
+最近开发项目以及学习过程中对于并发问题的解决方式没有清晰的思路。遂学习之，先做个记录吧。
 
-Readable &amp; WritableTypora gives you a seamless experience as both a reader and a writer
+并发问题并发遇到的常见问题就是，多个客户端同时操作同一个资源，会出现一些意想不到的异常情况。这里的‘操作’如果都是查询，那问题还不大，如果这些操作
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-10-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-10
                             </span>
                         <span class="publish-author">
                             
@@ -1139,8 +1073,12 @@ Readable &amp; WritableTypora gives you a seamless experience as both a reader a
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/first/">
-                        <span class="chip bg-color">first</span>
+                    <a href="/tags/%E5%B9%B6%E5%8F%91/">
+                        <span class="chip bg-color">并发</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%80%9D%E8%80%83/">
+                        <span class="chip bg-color">思考</span>
                     </a>
                     
                 </div>
